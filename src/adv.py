@@ -1,4 +1,8 @@
 from room import Room
+from player import Player
+import textwrap
+
+wrapper = textwrap.TextWrapper(width=50) 
 
 # Declare all the rooms
 
@@ -38,14 +42,34 @@ room['treasure'].s_to = room['narrow']
 #
 
 # Make a new player object that is currently in the 'outside' room.
+new_player = input("Please select your player name: ")
+print('\n')
+player_1 = Player(new_player, room['outside'])
 
 # Write a loop that:
-#
+while (True):
 # * Prints the current room name
+    current_room = player_1.current_room
+    print(f"\nCurrent Room: {current_room.name}")
+
 # * Prints the current description (the textwrap module might be useful here).
+    word_list = wrapper.wrap(text = current_room.description)
+    [print(line) for line in word_list]
+    print('----------------------------------')
+
 # * Waits for user input and decides what to do.
-#
+    selection = input("Which direction would you like to move?\nnorth - south - east - west\n")
+    direction = selection.lower()[0]
+
 # If the user enters a cardinal direction, attempt to move to the room there.
-# Print an error message if the movement isn't allowed.
-#
-# If the user enters "q", quit the game.
+    if direction in ['n', 's', 'e', 'w']:
+        player_1.move_player(direction)
+
+    # If the user enters "q", quit the game.
+    elif selection in ['quit', 'q', 'exit']:
+        print("Thanks for playing!")
+        break
+    else:
+        print("*** Not a valid input. You remain in current room ***")
+        print("Please select a direction or quit the game (q)")
+
