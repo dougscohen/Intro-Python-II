@@ -4,9 +4,10 @@
 from exceptions import MoveError
 
 class Player:
-    def __init__(self, name, current_room):
+    def __init__(self, name, current_room, inventory=[]):
         self.name = name
         self.current_room = current_room
+        self.inventory = inventory
 
     def __str__(self):
         return f"Player '{self.name}' is currently in {self.current_room}."
@@ -23,6 +24,8 @@ class Player:
 
         except MoveError as e:
             print('Oops! Not permitted to move that direction at this time.')
+
+    # def add_item(self):
 
 
 if __name__ == "__main__":

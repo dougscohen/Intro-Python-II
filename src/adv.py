@@ -1,5 +1,6 @@
 from room import Room
 from player import Player
+from item import Item
 import textwrap
 
 wrapper = textwrap.TextWrapper(width=50) 
@@ -23,6 +24,17 @@ to north. The smell of gold permeates the air."""),
     'treasure': Room("Treasure Chamber", """You've found the long-lost treasure
 chamber! Sadly, it has already been completely emptied by
 earlier adventurers. The only exit is to the south."""),
+}
+
+item = {
+    'sword':    Item("Sword",
+                    "helps you fight against enemies"),
+
+    'torch':    Item('torch',
+                    'helps you navigate in the dark'),
+
+    'food':     Item('food',
+                    'replinishes your health and gives you enegry')
 }
 
 
@@ -52,9 +64,10 @@ while (True):
     current_room = player_1.current_room
     print(f"\nCurrent Room: {current_room.name}")
 
-# * Prints the current description (the textwrap module might be useful here).
+# * Prints the current description
     word_list = wrapper.wrap(text = current_room.description)
     [print(line) for line in word_list]
+    [print(item) for item in current_room.items]
     print('----------------------------------')
 
 # * Waits for user input and decides what to do.
